@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    To validade the Login Form
 Library  SeleniumLibrary
+Library    Collections
 Test Setup        open the browser with the Mortgage payment url
 Test Teardown    Close Browser session
 Resource        resource.robot
@@ -37,8 +38,11 @@ verify error message is correct
 
 Verify Card titles in the Shop Page
     @{expectedList}=    Create List    iphone X    Samsung Note 8    Nokia Edge    Blackberry
-    ${elements}=    Get WebElements    .card-title
+    ${elements}=    Get WebElements    css:.card-title
+    @{actualList}=    Create List
+    
     FOR    ${element}    IN    @{elements}
         Log    ${element.text}
-        
+        Append To List    ${actualList}    ${element.text}
     END
+    Lists Should Be Equal    ${expectedList}    ${actualList}

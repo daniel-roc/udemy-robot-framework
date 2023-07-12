@@ -6,10 +6,10 @@
 
 # Robot Framework output files
 results/
-output.xml
-log.html
-report.html
-interactive_console_output.xml
+*.xml
+*.html
+*.html
+*.png
 
 # IDE files
 .vscode/
